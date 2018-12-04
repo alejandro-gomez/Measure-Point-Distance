@@ -12,7 +12,7 @@ points <- read.csv("[INTRODUCE YOU PATH AND FILENAME].csv")
 
 #Calculate the distance between points. You can add Z value as one part of the formula.
 distances <- cbind.data.frame((sqrt((points$x_2-points$x_1)^2+(points$y_2-points$y_1)^2)) + (sqrt((points$x_3-points$x_2)^2+(points$y_3-points$y_2)^2)))
-names(distances) <- "Lenght"
+names(distances) <- "Length"
 points_dis <- cbind.data.frame(points, distances)
 
 #Vector with the three points.
@@ -27,7 +27,7 @@ for (i in seq_along(l_sf)){
 }
 # Create simple feature geometry list column. Adapt EPSG code to your study zone.
 l_sfc1 <- st_sfc(l_sf, crs = "+init=epsg:25829")
-l_sfc2 <- st_sf(data.frame(points_dis$ID, points_dis$Lenght, geom = l_sfc1))
+l_sfc2 <- st_sf(data.frame(points_dis$ID, points_dis$Length, geom = l_sfc1))
 
 # Convert to `sp` object. Shapefile ESRI format.
 st_write(l_sfc2, "[INTRODUCE YOU PATH AND FILENAME].shp")
